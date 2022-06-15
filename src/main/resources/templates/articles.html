@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mes articles</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="mt-5">
+				<h2>Liste d'articles</h2>
+				<div class="col-md-6">
+					<form class="d-flex" role="search" th:action="@{/index}" method="get">
+						<input class="form-control me-2" type="text" placeholder="Rechercher un article"
+							aria-label="Search" name="search" th:value=${search}>
+						<button class="btn btn-outline-primary" type="submit">Search</button>
+					</form>
+				</div>
+				<table class="table mt-4">
+					<thead class="table-primary">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Description</th>
+							<th scope="col">Marque</th>
+							<th scope="col">Prix</th>
+							<th scope="col">Categorie</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="article:${articles}">
+							<th th:text="${article.id}" scope="row"></th>
+							<td th:text="${article.description}"></td>
+							<td th:text="${article.brand}"></td>
+							<td th:text="${article.price}"></td>
+							<td th:text="${article.category.name}"></td>
+							<td>
+								<a class="btn btn-warning btn-sm">Modifier</a>
+								<a class="btn btn-danger btn-sm" th:href="@{/delete(id=${article.id}, page=${currentPage}, search=${search})}">Supprimer</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination pagination-sm">
+						<li class="page-item" th:class="${currentPage == status.index+1 ? 'active' : ''}"
+							th:each="page, status:${pages}">
+							<a class="page-link" th:href="@{/index(page=${status.index+1}, search=${search})}"
+								th:text="${status.index+1}"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
