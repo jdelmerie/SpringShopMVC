@@ -94,22 +94,6 @@ public class ArticleController {
 		return "article";
 	}
 
-	@PostMapping("/update")
-	public String update(Model model, @Valid Article article, BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("categories", categoryRepository.findAll());
-			return "article";
-		}
-		System.out.println("Article [id=" + article.getId() + ", description=" + article.getDescription() + ", brand="
-				+ article.getBrand() + ", price=" + article.getPrice() + ", category=" + article.getCategory().getName()
-				+ "]");
-//		articleRepository.updateById(article.getDescription(), article.getBrand(), (float) article.getPrice(),
-//				article.getCategory().getId(), article.getId());
-		articleRepository.save(article);
-		return "redirect:/index";
-	}
-
 	@GetMapping("/delete")
 	public String delete(Long id, int page, String search) {
 		articleRepository.deleteById(id);
