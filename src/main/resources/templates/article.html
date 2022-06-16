@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${title}"></title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="mt-5">
+				<h2 th:text="${title}"></h2>
+				<div class="col-md-6">
+					<form th:action="@{/save}" method="post">
+						<input type="hidden" class="form-control" id="id" name="id" th:value="${article.id}">
+						<div class="mb-3">
+							<label for="description" class="form-label">Description</label>
+							<input type="text" class="form-control" id="description" name="description"
+								th:value="${article.description}">
+							<span class="text-danger" th:errors="${article.description}"></span>
+						</div>
+						<div class="mb-3">
+							<label for="brand" class="form-label">Marque</label>
+							<input type="text" class="form-control" id="brand" name="brand" th:value="${article.brand}">
+							<span class="text-danger" th:errors="${article.brand}"></span>
+						</div>
+						<div class="mb-3">
+							<div class="row">
+								<div class="col-6">
+									<label for="price" class="form-label">Prix</label>
+									<input type="number" class="form-control" id="price" name="price"
+										th:value="${article.price}">
+									<span class="text-danger" th:errors="${article.price}"></span>
+								</div>
+								<div class="col-6">
+									<label for="category" class="form-label">Catégorie</label>
+									<select class="form-select" name="category">
+										<option>Sélectionnez</option>
+										<option th:if="${edit}" th:each="category:${categories}"
+											th:value="${category.id}" th:text="${category.name}"
+											th:selected="${article.category.id} == ${category.id} ? ''"></option>
+
+										<option th:if="${add}" th:each="category:${categories}"
+											th:value="${category.id}" th:text="${category.name}"></option>
+									</select>
+									<span class="text-danger"></span>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary btn-sm">Enregistrer</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

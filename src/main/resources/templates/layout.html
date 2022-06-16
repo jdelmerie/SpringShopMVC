@@ -5,12 +5,15 @@
 	<meta charset="UTF-8">
 	<title>SPRING SHOP MVC</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg bg-primary bg-gradient">
+	<nav class="navbar navbar-expand-lg bg-primary bg-gradient ">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">SPRING SHOP MVC</a>
+			<a class="navbar-brand" th:href="@{/index}">SPRING SHOP MVC</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -18,10 +21,10 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" th:href="@{/index}">Acueil</a>
+						<a class="nav-link active" aria-current="page" th:href="@{/index}">Accueil</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Article</a>
+						<a class="nav-link">Catégorie</a>
 					</li>
 				</ul>
 			</div>

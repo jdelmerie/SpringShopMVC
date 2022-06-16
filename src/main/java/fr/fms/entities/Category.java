@@ -18,7 +18,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,4 +28,11 @@ public class Category implements Serializable {
 
 	@OneToMany(mappedBy = "category") // une catégorie est liée à plusieurs articles
 	private Collection<Article> articles;
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", articles=" + articles + "]";
+	}
+	
+	
 }
