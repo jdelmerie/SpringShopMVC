@@ -1,5 +1,6 @@
 package fr.fms.web;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -30,12 +31,12 @@ public class ArticleController {
 	CategoryRepository categoryRepository;
 
 	@GetMapping("/index")
-	public String index(Model model, @RequestParam(name = "page", defaultValue = "1") int page,
+	public String index(Model model,Principal principal, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "search", defaultValue = "") String search) {
-
+		System.out.println(principal);
 		List<Category> categories = categoryRepository.findAll();
 		Page<Article> articles = articleRepository.findByDescriptionContainsOrBrandContains(search, search,
-				PageRequest.of(page - 1, 5));
+				PageRequest.of(page - 1, 5)); 
 		model.addAttribute("title", "Tous les articles");
 		model.addAttribute("articles", articles.getContent());
 		model.addAttribute("categories", categories);
@@ -62,6 +63,11 @@ public class ArticleController {
 		model.addAttribute("currentPage", page);
 		return "articles";
 	}
+	
+	@GetMapping("/admin")
+	public String admin(Model model) {
+		return "admin";
+	}
 
 	@GetMapping("/add")
 	public String article(Model model) {
@@ -86,7 +92,7 @@ public class ArticleController {
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable(name = "id") int id) {
-		Article article = articleRepository.getReferenceById((long) id);
+		Article article = articleRepository.getById((long) id);
 		model.addAttribute("edit", true);
 		model.addAttribute("title", "Modifier un article");
 		model.addAttribute("categories", categoryRepository.findAll());

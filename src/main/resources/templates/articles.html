@@ -39,6 +39,7 @@
 							<th scope="col">Marque</th>
 							<th scope="col">Prix</th>
 							<th scope="col"></th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -49,6 +50,8 @@
 							<td th:text="${article.price}"></td>
 							<td>
 								<a class="btn btn-outline-success btn-sm">Ajouter au panier</a>
+							</td>
+							<td sec:authorize="hasRole('ADMIN')">
 								<a class="btn btn-warning btn-sm" th:href="@{'/edit/' + ${article.id}}">Modifier</a>
 								<a class="btn btn-danger btn-sm"
 									th:href="@{/delete(id=${article.id}, page=${currentPage}, search=${search})}">Supprimer</a>
@@ -69,7 +72,7 @@
 						</li>
 					</ul>
 				</nav>
-				<a class="btn btn-primary btn-sm" th:href="@{/add}">Ajouter un article</a>
+				<!--<a class="btn btn-primary btn-sm" th:href="@{/add}">Ajouter un article</a>-->
 			</div>
 		</div>
 	</div>

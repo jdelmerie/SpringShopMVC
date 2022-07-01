@@ -42,7 +42,7 @@
 											th:value="${category.id}" th:text="${category.name}"
 											th:selected="${article.category.id} == ${category.id} ? ''"></option>
 
-										<option th:if="${add}" th:each="category:${categories}"
+										<option th:unless="${add}" th:each="category:${categories}"
 											th:value="${category.id}" th:text="${category.name}"></option>
 									</select>
 									<span class="text-danger"></span>
